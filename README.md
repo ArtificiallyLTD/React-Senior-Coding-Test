@@ -1,6 +1,6 @@
-# React.js Coding Test for Artificially
+# Senior React.js Coding Test - Artificially
 
-Welcome to the second stage of our recruitment process at **Artificially**! This test is designed to assess your proficiency in **React.js**, focusing on building a frontend application that interacts with APIs, handles state management, and ensures proper file handling.
+Welcome to the frontend stage of our recruitment process at **Artificially**. This test evaluates your proficiency in React.js architecture, state management, API integration, and **UI/UX design quality**.
 
 Our website: [artificially.io](https://artificially.io)
 
@@ -8,94 +8,186 @@ Our website: [artificially.io](https://artificially.io)
 
 ## Objective
 
-You are tasked with building a **File Management Frontend** that interacts with a backend API. This frontend should allow users to upload, view, download, and delete files through the provided API.
+Build a **File Management Dashboard** that interacts with a backend API. This application should allow users to upload, view, download, and delete files through a polished, professional interface.
 
 ---
 
 ## Requirements
 
-### 1. Features
+### 1. Core Features
 
-1. **File Listing**
-   - Display a list of files retrieved from the API.
-   - Show each file’s:
-     - Name.
-     - Upload date.
-     - Action buttons (e.g., download and delete).
+#### File Listing
+- Display files in a well-designed table or card layout
+- Show for each file:
+  - Name
+  - File type icon
+  - Size (human readable)
+  - Upload date (formatted)
+  - Processing status (with visual indicator)
+  - Action buttons (download, delete)
+- Implement sorting and filtering options
+- Handle empty states gracefully
 
-2. **File Upload**
-   - Provide a form to upload files.
-   - Validate file input before sending it to the API.
+#### File Upload
+- Drag-and-drop upload zone + click to browse
+- File type and size validation before upload
+- Upload progress indicator
+- Support multiple file uploads
 
-3. **File Actions**
-   - **Download**: Allow users to download files by triggering the corresponding API endpoint.
-   - **Delete**: Allow users to delete files with a confirmation dialog.
-
-4. **State Management**
-   - Use React’s **useState** and **useEffect** hooks (or **React Query** if preferred).
-   - Ensure the UI updates dynamically after file actions (e.g., upload, delete).
-
-5. **Error Handling**
-   - Display error messages for failed uploads, invalid files, or API errors.
-   - Provide a fallback message if no files are available.
+#### File Actions
+- **Download**: Trigger download with loading state
+- **Delete**: Confirmation dialog before deletion
+- Visual feedback for all actions (loading, success, error)
 
 ---
 
-## Instructions
+### 2. Technical Requirements
 
-1. **Clone the Repository**
-   Clone this repository to your local environment:
-   ```bash
-   git clone git@github.com:ArtificiallyLTD/React-Coding-Test.git
-   cd React-Coding-Test
-   ```
+#### State Management
+- Use React Query for server state management
+- Optimistic updates for delete actions
+- Proper cache invalidation after mutations
 
-2. **Set Up the Project**  
-   1. Install dependencies:
-      ```bash
-      npm install
-      ```
-   2. Start the development server:
-      ```bash
-      npm start
-      ```
+#### API Integration
+- Centralized API configuration
+- Axios interceptors for auth headers (`Authorization: Bearer artificially-token`)
+- Proper error handling and retry logic
 
-3. **Connect to the API**  
-   - The backend API will be provided separately.
-   - Update the base URL for API requests in a centralized configuration file (e.g., \`src/config/api.js\`):
-     ```javascript
-     export const API_BASE_URL = "http://your-backend-api-url";
-     ```
+#### TypeScript
+- Full TypeScript implementation
+- Proper interfaces for API responses and component props
 
-4. **Build the Application**  
-   - Implement the required features and functionality in React.js.
-   - Use a UI library (e.g., Material-UI, TailwindCSS) or custom styles as you prefer.
+---
 
-5. **Submit Your Work**  
-   - Push your code to a **private GitHub repository**.
-   - Invite the following reviewers to your repo:
-     - `contact@artificially.io`
+### 3. UI/UX Requirements (Critical)
+
+**This is not a simple UI task.** Your design choices will be heavily evaluated.
+
+#### Material UI Implementation
+- Use Material UI (MUI) v5 as the component library
+- Customize the default theme (do not use default MUI styling)
+- Create a cohesive design system with:
+  - Custom color palette
+  - Typography scale
+  - Consistent spacing
+  - Border radius tokens
+  - Shadow definitions
+
+#### Design Quality Checklist
+
+| Aspect | Expectation |
+|--------|-------------|
+| **Color Palette** | Thoughtful primary/secondary colors, proper contrast ratios, consistent use of grays |
+| **Typography** | Clear hierarchy, appropriate font weights, readable line heights |
+| **Spacing** | Consistent padding/margins, proper component breathing room |
+| **Borders & Shadows** | Subtle, consistent use to create depth and separation |
+| **Icons** | Consistent icon set, appropriate sizing |
+| **Micro-interactions** | Hover states, transitions, loading states |
+| **Responsiveness** | Fully functional on mobile, tablet, and desktop |
+| **Empty & Error States** | Well-designed fallback UI for all edge cases |
+
+#### Layout Requirements
+- Responsive sidebar or header navigation
+- Proper content max-width on large screens
+- Mobile-first approach
+
+---
+
+### 4. Project Structure
+```
+src/
+├── api/
+│   ├── client.ts
+│   └── files.ts
+├── components/
+│   ├── common/
+│   │   ├── Button/
+│   │   ├── Dialog/
+│   │   └── DropZone/
+│   └── files/
+│       ├── FileList/
+│       ├── FileCard/
+│       ├── FileUpload/
+│       └── FileActions/
+├── hooks/
+│   └── useFiles.ts
+├── theme/
+│   ├── palette.ts
+│   ├── typography.ts
+│   └── index.ts
+├── types/
+│   └── file.ts
+├── pages/
+│   └── Dashboard.tsx
+└── App.tsx
+```
+
+---
+
+### 5. Bonus Points
+
+- Dark mode toggle with persisted preference
+- File preview modal (images, PDFs)
+- Keyboard shortcuts (e.g., `Del` to delete selected)
+- Skeleton loaders during data fetching
+- Toast notifications for actions
+
+---
+
+## Setup Instructions
+```bash
+git clone git@github.com:ArtificiallyLTD/React-Coding-Test.git
+cd React-Coding-Test
+
+npm install
+npm start
+```
+
+### API Configuration
+
+Update `src/api/client.ts`:
+```typescript
+export const API_BASE_URL = "http://your-backend-api-url";
+```
+
+---
+
+## Submission
+
+1. Push to a **private** GitHub repository
+2. Invite `contact@artificially.io` as collaborator
+3. Include README with:
+   - Setup instructions
+   - Design decisions explanation
+   - Screenshots of your implementation
 
 ---
 
 ## Evaluation Criteria
 
-Your submission will be evaluated based on:
+| Criteria | Weight |
+|----------|--------|
+| **UI/UX Design Quality** | 30% |
+| Code architecture & organization | 25% |
+| Functionality & completeness | 20% |
+| TypeScript & type safety | 15% |
+| Error handling & edge cases | 10% |
 
-1. **Code Quality**
-   - Clean and modular components.
-   - Proper state management and API handling.
-   - Well-structured file organization.
+---
 
-2. **Functionality**
-   - Completeness of required features (list, upload, download, delete).
-   - Dynamic updates after file actions.
+## Important Notes
 
-3. **Error Handling**
-   - Graceful handling of API errors and edge cases.
+**Design matters.** A functional but poorly designed submission will score lower than a polished, thoughtful implementation.
 
-4. **User Interface**
-   - A simple, clean, and intuitive UI.
+We are evaluating:
+- Your eye for design details
+- Ability to create professional, production-ready interfaces
+- Understanding of modern UI/UX patterns
 
-5. **Documentation**
-   - Clear setup and usage instructions in `README.md`.
+---
+
+## Time Expectation
+
+This task is designed for **3-4 hours**. Focus on quality over quantity - a well-designed subset of features beats a complete but ugly implementation.
+
+Good luck!
